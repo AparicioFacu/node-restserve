@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose'); // require necesario para conectar la base de dato
+const path = require("path"); // se utiliza el path para vincular la carpeta public con el server.js
 
 require("./config/config");
 
@@ -11,6 +12,11 @@ app.use(bodyParser.urlencoded({ extended: false })); // cada peticion que se hag
 
 // parse application/json // lo pasa a json(middleware)
 app.use(bodyParser.json());
+
+//Habilitar la carpeta Public
+const direccion = path.resolve(__dirname, "../public"); //es la direccion de la carpeta public(para eso se usa el path)
+app.use(express.static(direccion));
+
 
 //Configuracion global de ruas(acceso a las rutas)
 app.use(require("./routes/index"));
