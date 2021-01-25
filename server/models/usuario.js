@@ -42,7 +42,7 @@ let usuarioSchema = new Schema({ // es el esquema de la base de datos. una linea
         default: false
     }
 });
-
+//excluir password del modelo
 usuarioSchema.methods.toJSON = function() { // esto es un metodo para que el password no salga como informacion, es decir lo oculta a la vista al password
     let user = this;
     let userObject = user.toObject();

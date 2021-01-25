@@ -1,10 +1,12 @@
 const express = require('express');
+
 const Usuario = require("../models/usuario");
+const { verificarToken, verificaAdmin_Role } = require("../middleware/autenticacion")
 const bcrypt = require('bcrypt'); // este npm sirve para encriptar el password
 const _ = require("underscore"); // este npm es para validaciones especificas
 const app = express();
 
-app.get('/usuario', (req, res) => {
+app.get('/usuario', verificarToken, (req, res) => { //el segundo parametro es un middleware
     let desde = req.query.desde || 0; // el query sirve para buscar dentro de la base de dato. el parametro desde si es que se pone lo buscara desde el numero que haya ingresado o sino desde 0
     desde = Number(desde); // lo paso a numero
     let limite = req.query.limite || 5;
@@ -30,7 +32,8 @@ app.get('/usuario', (req, res) => {
 
         })
 })
-app.post('/usuario', (req, res) => {
+app.post('/usuario', [verificarToken, verificaAdmin_Role], (req, res) => {
+
     let body = req.body; // este body es el que va a aparecer cuando se procese el app.use(...)
     let usuario = new Usuario({ // aqui se crea el usuario con sus propiedades que tienen que coincidir con la base de datos
         nombre: body.nombre,
@@ -54,7 +57,7 @@ app.post('/usuario', (req, res) => {
         })
     });
 })
-app.put('/usuario/:id', (req, res) => { // sirve para actualizar el registro
+app.put('/usuario/:id', [verificarToken, verificaAdmin_Role], (req, res) => { // sirve para actualizar el registro
 
     let id = req.params.id; // este id seria el id del usuario(url) al usuario que yo quiero modificar    
     let body = _.pick(req.body, ["nombre", "email", "img", "rola", "estado"]); // esto es poner todoas las propiedades que son validas para poder actualizar
@@ -76,7 +79,7 @@ app.put('/usuario/:id', (req, res) => { // sirve para actualizar el registro
     })
 
 })
-app.delete('/usuario/:id', (req, res) => { // sirve para borrar pero en realidad es lo cambiar el estado xq el registro siempre queda
+app.delete('/usuario/:id', [verificarToken, verificaAdmin_Role], (req, res) => { // sirve para borrar pero en realidad es lo cambiar el estado xq el registro siempre queda
 
     let id = req.params.id;
     let cambiaEstado = {

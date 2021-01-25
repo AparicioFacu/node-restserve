@@ -6,13 +6,14 @@ require("./config/config");
 const app = express();
 const bodyParser = require('body-parser');
 
-// parse application/x-www-form-urlencoded procesa peticiones
+// parse application/x-www-form-urlencoded procesa peticiones (middleware)
 app.use(bodyParser.urlencoded({ extended: false })); // cada peticion que se haga en este acplicacion siempre van a pasar pore estas 2 lineas
 
-// parse application/json // lo pasa a json
+// parse application/json // lo pasa a json(middleware)
 app.use(bodyParser.json());
 
-app.use(require("./routes/usuario")); // se importa y se usa las rutas del usuario(usuario.js)
+//Configuracion global de ruas(acceso a las rutas)
+app.use(require("./routes/index"));
 
 mongoose.connect(process.env.URLDB, { //conectadose a la base de datos mongodb "cafe"
     useNewUrlParser: true,
