@@ -7,6 +7,8 @@ app.use(require('./usuario')); // se importa y se usa las rutas del usuario(usua
 app.use(require('./login'));
 app.use(require('./categoria'));
 app.use(require('./producto'));
+app.use(require('./uploads'));
+app.use(require('./imagenes'));
 
 
 module.exports = app;

@@ -1,7 +1,6 @@
 const express = require('express');
 const Producto = require("../models/producto");
 const { verificarToken } = require("../middleware/autenticacion");
-const { find } = require('../models/producto');
 
 const app = express();
 
