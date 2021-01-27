@@ -47,7 +47,6 @@ usuarioSchema.methods.toJSON = function() { // esto es un metodo para que el pas
     let user = this;
     let userObject = user.toObject();
     delete userObject.password;
-
     return userObject
 }
 

@@ -47,8 +47,8 @@ app.post('/usuario', [verificarToken, verificaAdmin_Role], (req, res) => {
             return res.status(400).json({ // manda el error por si algo anda mal
                 ok: false,
                 err
-            })
-        }
+            });
+        };
 
         //usuarioDB.password = null;
         res.json({
@@ -107,9 +107,6 @@ app.delete('/usuario/:id', [verificarToken, verificaAdmin_Role], (req, res) => {
             usuario: usuarioBorrado
         });
     });
-
-
-
 })
 
 module.exports = app;

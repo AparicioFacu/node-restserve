@@ -5,6 +5,8 @@ const app = express();
 
 app.use(require('./usuario')); // se importa y se usa las rutas del usuario(usuario.js)
 app.use(require('./login'));
+app.use(require('./categoria'));
+app.use(require('./producto'));
 
 
 module.exports = app;
