@@ -68,13 +68,11 @@ app.put('/upload/:tipo/:id', (req, res) => {
                     err
                 });
         //Aqui la imagen ya se carga
-        if (tiposValidos === 'usuarios') {
+        if (tipo === 'productos') {
             imagenUsuario(id, res, nombreArchivo);
         } else {
             imagenProducto(id, res, nombreArchivo);
         }
-
-
     });
 });
 

@@ -8,7 +8,7 @@ const { verificaTokenImg } = require('../middleware/autenticacion')
 let app = express();
 
 
-app.get('/imagen/:tipo/:img', verificaTokenImg, (req, res) => {
+app.get('/imagen/:tipo/:img', verificaTokenImg, (req, res) => { // para obtener las imagenes de un usuario o producto
 
     let tipo = req.params.tipo;
     let img = req.params.img;
